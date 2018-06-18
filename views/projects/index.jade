@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    h1.
+         #{title}
+    ul
+        - each project, i in projects
+            li
+                = project.title
+                = project.surname
+                = project.price
+                = project.work
+                = project.start
+                = project.end
+                = project._id
+    a(href='/') Go back

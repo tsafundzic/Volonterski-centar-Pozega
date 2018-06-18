@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    h1.
+     Project ID #{project._id}
+    p Name: #{project.title}
+    p Surname: #{project.description}
+    p Price: #{project.price}
+    p Work: #{project.work}
+    p Start: #{project.start}
+    p End: #{project.end}
+
+    form#formAddBlob(name="addblob1",method="post",action="/projects/archive")
+        input#projectid(type='hidden', value='#{project._id}', name='project_id')
+        input(type='hidden',value='PUT',name='_method')
+        br
+        if project.archived
+            button#btnSubmit.btn.btn-default(type="submit") Dearhivirja
+        else
+            button#btnSubmit.btn.btn-default(type="submit") Arhiviraj
+        br
+        br
+    table
+        tr
+            th Add user as participant
+            th
+        each user in users
+            tr
+                td=user.name
+                td
+                    form#formAddBlob(name="addblob",method="post",action="/projects/show")
+                        input#projectid(type='hidden', value='#{project._id}', name='project_id')
+                        input#userid(type='hidden', value='#{user._id}', name='user_id')
+                        input(type='hidden',value='PUT',name='_method')
+                        button#btnSubmit.btn.btn-default(type="submit") Add
+
+    p
+        a(href='/projects') Go back

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+	h1.
+		Project ID #{project._id}
+	form(action='/projects/#{project._id}/edit',method='post',name='updateblob',enctype='application/x-www-form-urlencoded')
+		p Title:
+			input#inputTitle(type='text', value='#{project.title}', name='title')
+		p Description:
+			input#inputDescription(type='text', value='#{project.description}', name='description')
+		p Price:
+			input#inputPrice(type='number', value='#{project.price}', name='price')
+		p Work:
+			input#inputWork(type='text', value='#{project.work}', name='work')
+		p Start:
+			input#inputStart(type='date', value='#{projectStart}', name='start')
+		p End:
+			input#inputEnd(type='date', value='#{projectEnd}', name='end')
+		p
+			input(type='hidden',value='PUT',name='_method')
+		p
+			button#btnSubmit.btn.btn-default(type='submit').
+				Update

@@ -1,0 +1,60 @@
+doctype html
+html
+
+head
+  meta(charset='UTF-8')
+  title= title
+  script(src='https://www.google.com/recaptcha/api.js', async='', defer='')
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+  link(rel='stylesheet', href='/stylesheets/radio_checkbox_styles.css', type='text/css')
+  link(rel='stylesheet', href='/stylesheets/alerts.css', type='text/css')
+  link(rel='stylesheet', href='/stylesheets/bootstrap.css' type='text/css')
+  link(rel='stylesheet', href='/stylesheets/style.css' type='text/css')
+ 
+nav.navbar.navbar-expand-lg.navbar.navbar-dark.bg-dark
+  .container
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='http://volonterski.oppidum.hr/') Početna 
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Burza
+          .dropdown-menu
+            a.dropdown-item(href='#') Baza volontera
+            a.dropdown-item(href='#') Baza organizatora
+        li.nav-item
+          a.nav-link(href='/users/register') Registracija organizatora
+        li.nav-item.active
+          a.nav-link(href='#')  Registracija volontera
+    a.navbar-brand(href='http://volonterski.oppidum.hr/') Volonterski centar Požega
+block content
+  .container
+      .header.clearfix
+        nav
+          ul.nav.nav-pills.pull-right
+            if user
+              li
+                a(href='/') Home
+              li
+                a(href='/users/logout') Logout
+            else
+              li
+                a(href='/users/login') Login
+              li
+                a(href='/users/register') Register
+        h3.text-muted Projekti
+      .row
+        .col-lg-12
+          if success_msg.msg
+            .alert.alert-success #{success_msg.msg}
+          if error_msg.msg
+            .alert.alert-danger #{error_msg.msg}
+          if error.msg
+            .alert.alert-danger #{error.msg}
+         
+ 
