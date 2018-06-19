@@ -76,8 +76,7 @@ router.route('/')
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "title" attributes for forms
         var title = req.body.title;
         var description = req.body.description;
-        var price = req.body.price;
-        var work = req.body.work;
+        var location = req.body.location;
         var start = req.body.start;
         var end = req.body.end;
         var creator_id = res.locals.user._id;
@@ -85,8 +84,7 @@ router.route('/')
         mongoose.model('Project').create({
             title : title,
             description : description,
-            price : price,
-            work : work,
+            location : location,
             start : start,
             end : end,
             creator_id : creator_id
@@ -343,8 +341,7 @@ router.route('/:id/edit')
 	    // Get our REST or form values. These rely on the "title" attributes
         var title = req.body.title;
         var description = req.body.description;
-	    var price = req.body.price;
-	    var work = req.body.work;
+	    var location = req.body.location;
         var start = req.body.start;
         var end = req.body.end;
 
@@ -354,8 +351,7 @@ router.route('/:id/edit')
 	        project.update({
                 title : title,
                 description :description,
-	            price : price,
-                work : work,
+	            location : location,
                 start : start, 
                 end : end
 	        }, function (err, blobID) {
