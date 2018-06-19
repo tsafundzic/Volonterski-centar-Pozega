@@ -152,8 +152,8 @@ router.post('/register_volunteer', function (req, res) {
 
 
 passport.use(new LocalStrategy(
-	function (oib, password, done) {
-		User.getUserByUsername(oib, function (err, user) {
+	function (email, password, done) {
+		User.getUserByUsername(email, function (err, user) {
 			if (err) throw err;
 			if (!user) {
 				return done(null, false, { message: 'Unknown User' });
