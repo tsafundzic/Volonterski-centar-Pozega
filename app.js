@@ -12,11 +12,11 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 
-mongoose.connect('mongodb://localhost/projects');
+/* mongoose.connect('mongodb://localhost/projects');
 require("./model/projects");
 require("./model/user");
 var db = mongoose.connection;
-
+ */
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/projects');
