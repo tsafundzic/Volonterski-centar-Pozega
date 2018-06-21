@@ -1,16 +1,38 @@
 extends ../layout
 
 block content
-    h1.
-         #{title}
-    ul
-        - each project, i in projects
-            li
-                = project.title
-                = project.surname
-                = project.price
-                = project.work
-                = project.start
-                = project.end
-                = project._id
-    a(href='/') Go back
+
+    .jumbotron.jumbotron-fluid
+      .container
+        h1 Pregled dostupnih poslova
+        p
+          | Trenutna potražnja za volonterima.
+    .container
+      .container
+            table.table
+                - each project, i in projects
+                
+                    thead.thead-light
+                        tr
+                        th(scope='col') Posao ID
+                        th(scope='col') #{project._id}
+                    tbody
+                        tr
+                            th(scope='row') Naziv posla
+                            td #{project.title}
+                        tr
+                            th(scope='row') Opis posla
+                            td #{project.description}
+                        tr
+                            th(scope='row') Lokacija
+                            td #{project.location}
+                        tr
+                            th(scope='row') Početak
+                            td #{project.start}
+                        tr
+                            th(scope='row') Kraj
+                            td #{project.end}
+                         tr
+                            th(scope='row') 
+                            td 
+        a(href='/') Nazad

@@ -4,9 +4,9 @@ block content
 
  .jumbotron.jumbotron-fluid
       .container
-        h1 Registracija organizatora
+        h1 Objavi novi posao
         p
-          | Za upis organizacije u bazu podataka potrebno je popuniti potrebne podatke i poslati ih.
+          | Objavi novi posao i potragu za volonterima.
     .container
       .container
         form.form-horizontal(method="post", action="/projects")
@@ -19,7 +19,8 @@ block content
                 .col-sm-2
                     label.label-text Opis posla
                 .col-sm-6
-                    input.form-control.form-control-sm-6(type='text', name='description', placeholder='Opis posla', required='')
+                    
+                    textarea.form-control.form-control-sm-6(name="description", cols="30", rows="10", placeholder='Opis posla', required='')
             .form-group.row
                 .col-sm-2
                     label.label-text Lokacija
