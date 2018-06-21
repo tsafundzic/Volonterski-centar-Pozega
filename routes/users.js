@@ -20,6 +20,11 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
+// Login volunteer
+router.get('/login_volunteer', function (req, res) {
+	res.render('login_volunteer');
+});
+
 // Register User
 router.post('/register', function (req, res) {
 	var name = req.body.name;

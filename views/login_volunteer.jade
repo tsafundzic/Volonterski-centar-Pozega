@@ -4,9 +4,9 @@ block content
 
  .jumbotron.jumbotron-fluid
         .container
-            h1 Prijava organizatora u sustav
-            p Za administriranje poslova potrebna je prijava u sustav.
-    .container            
+            h1 Prijava volontera u sustav
+            p Za administriranje korisničkog računa potrebna je prijava u sustav.
+    .container
       .container
         form.form-horizontal(method='POST' action='/users/login')
             .form-group.row
@@ -24,5 +24,5 @@ block content
                 .col-sm-6
                     button.btn.btn-primary(type='submit') Prijava
                     | 
-                    a.btn.btn-primary(href='/users/register') Registriraj organizaciju
+                    a.btn.btn-primary(href='/users/register_volunteer') Registracija volontera
 

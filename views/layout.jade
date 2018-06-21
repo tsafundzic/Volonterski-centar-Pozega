@@ -25,31 +25,18 @@ head
         li.nav-item
           a.nav-link(href='http://volonterski.oppidum.hr/') Početna 
         li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Burza
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Baza
           .dropdown-menu
             a.dropdown-item(href='#') Baza volontera
             a.dropdown-item(href='#') Baza organizatora
+            a.dropdown-item(href='#') Baza poslova
         li.nav-item
-          a.nav-link(href='/users/register') Registracija organizatora
+          a.nav-link(href='/users/login') Organizatori
         li.nav-item
-          a.nav-link(href='/users/register_volunteer')  Registracija volontera
+          a.nav-link(href='/users/login_volunteer')  Volonteri
     a.navbar-brand(href='http://volonterski.oppidum.hr/') Volonterski centar Požega
 
  .container
-      .header.clearfix
-        nav
-          ul.nav.nav-pills.pull-right
-            if user
-              li
-                a(href='/') Home
-              li
-                a(href='/users/logout') Logout
-            else
-              li
-                a(href='/users/login') Login
-              li
-                a(href='/users/register') Register
-        h3.text-muted Burza volontera
       .row
         .col-lg-12
           if success_msg.msg
