@@ -32,7 +32,7 @@ router.route('/user_projects')
                     //HTML response will render the index.jade file in the views/projects folder. We are also setting "projects" to be an accessible variable in our jade view
                     html: function(){
                         res.render('projects/user_projects', {
-                            title: 'All my Projects',
+                            title: 'Svi moji poslovi',
                             "projects" : projects
                         });
                     },
@@ -59,7 +59,7 @@ router.route('/')
                       //HTML response will render the index.jade file in the views/projects folder. We are also setting "projects" to be an accessible variable in our jade view
                     html: function(){
                         res.render('projects/index', {
-                              title: 'All my Projects',
+                              title: 'Svi poslovi',
                               "projects" : projects
                           });
                     },
@@ -113,7 +113,7 @@ router.route('/')
 
 /* GET New Project page. */
 router.get('/new', function(req, res) {
-    res.render('projects/new', { title: 'Add New Project' });
+    res.render('projects/new', { title: 'Dodaj novi posao' });
 });
 
 router.route('/show')
@@ -174,75 +174,7 @@ router.route('/archive')
             })
         });
     })
-router.route('/works')
-    //GET all projects
-    .get(function(req, res, next) {
-        //retrieve all projects from Monogo
-        mongoose.model('Project').find({}, function (err, projects) {
-            projects.forEach(function(project, index) {
 
-                var workers = project.workers.split(" ");
-                var workerOnThisProject = false;
-
-                workers.forEach(function(worker){
-                    if(res.locals.user._id == worker){
-                        workerOnThisProject = true;
-                    }
-                });
-
-                if(!workerOnThisProject){
-                    projects.splice(index, 1);
-                }
-                workerOnThisProject = false;
-            });
-              if (err) {
-                  return console.error(err);
-              } else {
-                  //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
-                  res.format({
-                      //HTML response will render the index.jade file in the views/projects folder. We are also setting "projects" to be an accessible variable in our jade view
-                    html: function(){
-                        res.render('projects/works', {
-                              title: 'Project participations',
-                              "projects" : projects
-                          });
-                    },
-                    //JSON response will show all projects in JSON format
-                    json: function(){
-                        res.json(projects);
-                    }
-                });
-              }     
-        });
-    })
-    .put(function(req, res) { //storing workers on projects
-
-        var userid = req.body.user_id;
-        var projectid = req.body.project_id;
-        mongoose.model('Project').findById(projectid, function (err, project) {
-            //update it
-
-            project.update({
-                work_done : project.work_done + userid + " ",
-            }, function (err, blobID) {
-            if (err) {
-                res.send("There was a problem updating the information to the database: " + err);
-            } 
-            else {
-                    //HTML responds by going back to the page or you can be fancy and create a new view that shows a success page.
-                    res.format({
-                        html: function(){
-                            res.redirect("/projects/works");
-                        },
-                        //JSON responds showing the updated values
-                        json: function(){
-                            res.json(project);
-                        }
-                    });
-            }
-            })
-        });
-    })
 // route middleware to validate :id
 router.param('id', function(req, res, next, id) {
     //console.log('validating ' + id + ' exists');
