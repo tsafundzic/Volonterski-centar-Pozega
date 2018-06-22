@@ -1,11 +1,21 @@
 extends layout
 
-block content
-  h1= title
-  a(href="/projects") Show all projects
-  br
-  a(href="/projects/user_projects") Show my proejcts
-  br
-  a(href="/projects/works") Show my project participation
-  br
-  a(href="/projects/new") New project
+block content              
+
+ .jumbotron.jumbotron-fluid
+      .container
+        h1 Korisničke stranice
+        p
+          | Pregled, dodavanje i uređivanje poslova.
+    .container
+      .container
+        
+        h1=user.name        
+        a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
+        p
+        a.btn.btn-secondary(href='/projects/user_projects') Pregled i uređivanje vlastitih ponuđenih poslova
+        p
+        a.btn.btn-secondary(href='/projects/new') Kreiraj novu ponudu poslova
+         
+
+

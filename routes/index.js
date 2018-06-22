@@ -5,7 +5,7 @@ var expressValidator = require('express-validator');
 
 /* GET home page. */
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index', { title: 'Projects' });
+	res.render('index', { title: 'Korisničke stranice' });
 });
 
 function ensureAuthenticated(req, res, next){

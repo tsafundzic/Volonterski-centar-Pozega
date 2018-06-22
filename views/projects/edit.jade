@@ -1,23 +1,44 @@
 extends ../layout
 
 block content
-	h1.
-		Project ID #{project._id}
-	form(action='/projects/#{project._id}/edit',method='post',name='updateblob',enctype='application/x-www-form-urlencoded')
-		p Title:
-			input#inputTitle(type='text', value='#{project.title}', name='title')
-		p Description:
-			input#inputDescription(type='text', value='#{project.description}', name='description')
-		p Price:
-			input#inputPrice(type='number', value='#{project.price}', name='price')
-		p Work:
-			input#inputWork(type='text', value='#{project.work}', name='work')
-		p Start:
-			input#inputStart(type='date', value='#{projectStart}', name='start')
-		p End:
-			input#inputEnd(type='date', value='#{projectEnd}', name='end')
-		p
-			input(type='hidden',value='PUT',name='_method')
-		p
-			button#btnSubmit.btn.btn-default(type='submit').
-				Update
+
+	.jumbotron.jumbotron-fluid
+		.container
+			h1 Ažuriraj posao
+			p Ažuriraj podatke o poslu.
+
+	.container
+		.container
+				h3.
+					ID #{project._id}
+				form.form-horizontal(action='/projects/#{project._id}/edit',method='post',name='updateblob',enctype='application/x-www-form-urlencoded')
+					.form-group.row
+						.col-sm-2
+							label.label-text Naziv posla
+						.col-sm-6
+							input.form-control.form-control-sm(type='text', name='title', value='#{project.title}', required='')
+					.form-group.row
+						.col-sm-2
+							label.label-text Opis posla
+						.col-sm-6							
+							textarea.form-control.form-control-sm-6(name="description", cols="30", rows="10", value='#{project.description}', required='')
+					.form-group.row
+						.col-sm-2
+							label.label-text Lokacija
+						.col-sm-6
+							input.form-control.form-control-sm-6(type='text', name='location', value='#{project.location}', required='')
+					.form-group.row
+						.col-sm-2
+							label.label-text Početak
+						.col-sm-6
+							input.form-control.form-control-sm-6(type='date', name='start', value='#{projectStart}')
+					.form-group.row
+						.col-sm-2
+							label.label-text Kraj 
+						.col-sm-6
+							input.form-control.form-control-sm-6(type='date', name='end', value='#{projectEnd}')
+					.form-group.row
+						.col-sm-2
+						.col-sm-6
+							button#btnSubmit.btn.btn-primary(type="submit") Ažuriraj
+			

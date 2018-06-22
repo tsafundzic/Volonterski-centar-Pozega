@@ -1,25 +1,47 @@
 extends ../layout
 
 block content
-    h1.
-         #{title}
-    a(href='/projects/new') Create new project
-    ul
-        - each project, i in projects
-            li
-                = project.title
-                = project.surname
-                = project.price
-                = project.work
-                = project.start
-                = project.end
-                = project._id
-                form(action='/projects/#{project._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
-                    input(type='hidden',value='DELETE',name='_method')
-                    button.btn.btn-default(type='submit').
-                        Delete
-                p 
-                    a(href='/projects/#{project._id}/edit') Edit
-                p
-                    a(href='/projects/#{project._id}') Show
-    a(href='/') Go back
+
+    .jumbotron.jumbotron-fluid
+      .container
+        h1 Pregled dostupnih poslova
+        p
+          | Trenutna potražnja za volonterima.
+    .container
+      .container
+            table.table
+                        - each project, i in projects
+                        
+                            thead.thead-light
+                                tr
+                                th(scope='col') Posao ID
+                                th(scope='col') #{project._id}
+                            tbody
+                                tr
+                                    th(scope='row') Naziv posla
+                                    td #{project.title}
+                                tr
+                                    th(scope='row') Opis posla
+                                    td #{project.description}
+                                tr
+                                    th(scope='row') Lokacija
+                                    td #{project.location}
+                                tr
+                                    th(scope='row') Početak
+                                    td #{project.start}
+                                tr
+                                    th(scope='row') Kraj
+                                    td #{project.end}
+                                tr
+                                    th(scope='row') 
+                                    td 
+                                        form(action='/projects/#{project._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+                                            input(type='hidden',value='DELETE',name='_method')
+                                            button.btn.btn-default(type='submit') Obriši
+                                            |  
+                                            a.btn.btn-default(href='/projects/#{project._id}/edit') Ažuriraj
+                                tr
+                                    th(scope='row') 
+                                    td 
+
+            a(href='/') Nazad
