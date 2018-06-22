@@ -41,6 +41,7 @@ var VolunteerSchema = mongoose.Schema({
 var Volunteer = module.exports = mongoose.model('Volunteer', VolunteerSchema);
 
 module.exports.createVolunteer = function (newVolunteer, callback) {
+    console.log('In the create Volunteer function');
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(newVolunteer.password, salt, function (err, hash) {
             newVolunteer.password = hash;

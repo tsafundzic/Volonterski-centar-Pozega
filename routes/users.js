@@ -139,41 +139,37 @@ router.post('/register_volunteer', function (req, res) {
 
 			});
 	}
-	else {/*  */
+	else {
 
-		
-		//checking if email is already taken
-		
-			
-				console.log('Stvaranje novog volontera');
+		//check if e-mail is taken
+		console.log('Stvaranje novog volontera');
 
-				var newVolunteer = new Volunteer({
-					password: password,
-					email: email,
-					name: name,
-					address: address,
-					city: city,
-					phone: phone,
-					english_level: english_level,
-					computer_skill: computer_skill,
-					volunteering_availability: volunteering_availability,
-					volunteering_time: volunteering_time,
-					dateOfBirth: dateOfBirth
-				});
-				Volunteer.createVolunteer(newVolunteer, function (err, volunteer) {
-
-					if (err) {
-						console.log(err);
-						throw err;
-					}
-					console.log(volunteer);
-				});
-
-				req.flash('success_msg', 'You are registered and can now login');
-				console.log('You are registered and can now login')
-				res.redirect('/users/login_volunteer');
-			}
+		var newVolunteer = new Volunteer({
+			password: password,
+			email: email,
+			name: name,
+			address: address,
+			city: city,
+			phone: phone,
+			english_level: english_level,
+			computer_skill: computer_skill,
+			volunteering_availability: volunteering_availability,
+			volunteering_time: volunteering_time,
+			dateOfBirth: dateOfBirth
 		});
+		Volunteer.createVolunteer(newVolunteer, function (err, volunteer) {
+			if (err) {
+				console.log(err);
+				throw err;
+			}
+			console.log(volunteer);
+		});
+
+		req.flash('success_msg', 'You are registered and can now login');
+		console.log('You are registered and can now login')
+		res.redirect('/users/login_volunteer');
+	}
+});
 
 
 
