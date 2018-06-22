@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../model/user');
+var Organisation = require('../model/organisation');
+var Volunteer = require('../model/volunteer');
 
 // Register
 router.get('/register', function (req, res) {
@@ -26,6 +28,7 @@ router.get('/login_volunteer', function (req, res) {
 });
 
 // Register User
+// ---------->>>> ovdje promijeniti na Organisation
 router.post('/register', function (req, res) {
 	var name = req.body.name;
 	var email = req.body.email;
@@ -56,12 +59,16 @@ router.post('/register', function (req, res) {
 	}
 	else {
 		//checking for email and oib are already taken
-		User.findOne({ oib: { 
-			"$regex": "^" + oib + "\\b", "$options": "i"
-	}}, function (err, user) {
-			User.findOne({ email: { 
-				"$regex": "^" + email + "\\b", "$options": "i"
-		}}, function (err, mail) {
+		User.findOne({
+			oib: {
+				"$regex": "^" + oib + "\\b", "$options": "i"
+			}
+		}, function (err, user) {
+			User.findOne({
+				email: {
+					"$regex": "^" + email + "\\b", "$options": "i"
+				}
+			}, function (err, mail) {
 				if (user || mail) {
 					res.render('register', {
 						user: user,
@@ -69,7 +76,7 @@ router.post('/register', function (req, res) {
 					});
 				}
 				else {
-					var newUser = new User({						
+					var newUser = new User({
 						oib: oib,
 						password: password,
 						email: email,
@@ -82,7 +89,7 @@ router.post('/register', function (req, res) {
 						if (err) throw err;
 						console.log(user);
 					});
-         		req.flash('success_msg', 'You are registered and can now login');
+					req.flash('success_msg', 'You are registered and can now login');
 					res.redirect('/users/login');
 				}
 			});
@@ -92,68 +99,93 @@ router.post('/register', function (req, res) {
 
 //register volunteer
 router.post('/register_volunteer', function (req, res) {
+
+	console.log('Zahtjev ispucan');
+
 	var name = req.body.name;
 	var email = req.body.email;
-	var oib = req.body.oib;
 	var address = req.body.address;
 	var city = req.body.city;
+	var dateOfBirth = req.body.datumrodenja;
 	var phone = req.body.phone;
 	var password = req.body.password;
 	var password2 = req.body.password2;
+	var english_level = req.body.poznavanjeengleskog;
+	var computer_skill = req.body.poznavanjeradanaracunalu;
+	var volunteering_availability = req.body.vrijemezavolontiranje;
+	var volunteering_time = req.body.satitjedno;
 
 	// Validation
 	req.checkBody('name', 'Name is required').notEmpty();
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('oib', 'Oib is required').notEmpty();
+	req.checkBody('datumrodenja', 'Date of Birth is required').notEmpty();
 	req.checkBody('address', 'Address is required').notEmpty();
 	req.checkBody('city', 'City is required').notEmpty();
 	req.checkBody('phone', 'Phone is required').notEmpty();
 	req.checkBody('password', 'Password is required').notEmpty();
 	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
+	console.log('Checkbody dobar');
+
+
+
 	var errors = req.validationErrors();
 
 	if (errors) {
-		res.render('register', {
-			errors: errors
-		});
+		console.log(errors),
+			res.render('register_volunteer', {
+				errors: errors,
+
+			});
 	}
 	else {
-		//checking for email and oib are already taken
-		User.findOne({ oib: { 
-			"$regex": "^" + oib + "\\b", "$options": "i"
-	}}, function (err, user) {
-			User.findOne({ email: { 
-				"$regex": "^" + email + "\\b", "$options": "i"
-		}}, function (err, mail) {
-				if (user || mail) {
-					res.render('register', {
-						user: user,
-						mail: mail
-					});
-				}
-				else {
-					var newUser = new User({						
-						oib: oib,
-						password: password,
-						email: email,
-						name: name,
-						address: address,
-						city: city,
-						phone: phone
-					});
-					User.createUser(newUser, function (err, user) {
-						if (err) throw err;
-						console.log(user);
-					});
-         		req.flash('success_msg', 'You are registered and can now login');
-					res.redirect('/users/login');
-				}
-			});
+
+		console.log('provjera emaila');
+
+		//checking if email is already taken
+		Volunteer.findOne({ 'email': req.body.email }, function (err, mail) {
+
+			console.log('provjera emaila2');
+			if (mail) {
+				res.render('register_voluteer', {
+					volunteer: volunteer,
+					mail: mail
+				});
+			}
+			else {
+				console.log('Stvaranje novog volontera');
+
+				var newVolunteer = new Volunteer({
+					password: password,
+					email: email,
+					name: name,
+					address: address,
+					city: city,
+					phone: phone,
+					english_level: english_level,
+					computer_skill: computer_skill,
+					volunteering_availability: volunteering_availability,
+					volunteering_time: volunteering_time,
+					dateOfBirth: dateOfBirth
+				});
+				Volunteer.createVolunteer(newVolunteer, function (err, volunteer) {
+
+					if (err) {
+						console.log(err);
+						throw err;
+					}
+					console.log(volunteer);
+				});
+
+				req.flash('success_msg', 'You are registered and can now login');
+				console.log('You are registered and can now login')
+				res.redirect('/users/login_volunteer');
+			}
 		});
 	}
 });
+
 
 
 passport.use(new LocalStrategy(
