@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var Organisation = require('../model/organisation');
+var User = require('../model/user');
 var Volunteer = require('../model/volunteer');
 
 // Register
@@ -139,21 +139,12 @@ router.post('/register_volunteer', function (req, res) {
 
 			});
 	}
-	else {
+	else {/*  */
 
-		console.log('provjera emaila');
-
+		
 		//checking if email is already taken
-		Volunteer.findOne({ 'email': req.body.email }, function (err, mail) {
-
-			console.log('provjera emaila2');
-			if (mail) {
-				res.render('register_voluteer', {
-					volunteer: volunteer,
-					mail: mail
-				});
-			}
-			else {
+		
+			
 				console.log('Stvaranje novog volontera');
 
 				var newVolunteer = new Volunteer({
@@ -183,8 +174,7 @@ router.post('/register_volunteer', function (req, res) {
 				res.redirect('/users/login_volunteer');
 			}
 		});
-	}
-});
+
 
 
 

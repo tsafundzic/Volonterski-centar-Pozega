@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-// Organisation Schema
-var OrganisationSchema = mongoose.Schema({
+// User Schema
+var UserSchema = mongoose.Schema({
 	oib: {
 		type: Number,
 		index:true
@@ -27,24 +27,24 @@ var OrganisationSchema = mongoose.Schema({
 	}
 });
 
-var Organisation = module.exports = mongoose.model('Organisation', OrganisationSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports.createOrganisation = function(newOrganisation, callback){
+module.exports.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
-	    bcrypt.hash(newOrganisation.password, salt, function(err, hash) {
-	        newOrganisation.password = hash;
-	        newOrganisation.save(callback);
+	    bcrypt.hash(newUser.password, salt, function(err, hash) {
+	        newUser.password = hash;
+	        newUser.save(callback);
 	    });
 	});
 }
 
-module.exports.getOrganisationByEmail = function(email, callback){
+module.exports.getUserByUsername = function(email, callback){
 	var query = {email: email};
-	Organisation.findOne(query, callback);
+	User.findOne(query, callback);
 }
 
-module.exports.getOrganisationById = function(id, callback){
-	Organisation.findById(id, callback);
+module.exports.getUserById = function(id, callback){
+	User.findById(id, callback);
 }
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){
