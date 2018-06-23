@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var passport = require('passport');
+var passportVolunteer
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../model/user');
@@ -174,7 +175,7 @@ router.post('/register_volunteer', function (req, res) {
 
 
 
-passport.use(new LocalStrategy(
+passport.use('organisation_strategy', new LocalStrategy(
 	function (email, password, done) {
 		User.getUserByUsername(email, function (err, user) {
 			if (err) throw err;
@@ -193,18 +194,52 @@ passport.use(new LocalStrategy(
 		});
 	}));
 
+
+passport.use('volunteer_strategy', new LocalStrategy(
+	function (email, password, done) {
+		Volunteer.getVolunteerByEmail(email, function (err, volunteer) {
+			if (err) throw err;
+			if (!volunteer) {
+				return done(null, false, { message: 'Unknown volunteer' });
+			}
+
+			Volunteer.comparePassword(password, volunteer.password, function (err, isMatch) {
+				if (err) throw err;
+				if (isMatch) {
+					return done(null, volunteer);
+				} else {
+					return done(null, false, { message: 'Invalid password' });
+				}
+			});
+		});
+	}));
+
 passport.serializeUser(function (user, done) {
 	done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-	User.getUserById(id, function (err, user) {
-		done(err, user);
+	User.getUserById(id, function(err, user){
+		if(err) done(err);
+		  if(user){
+			done(null, user);
+		  } else {
+			 Volunteer.getVolunteerById(id, function(err, user){
+			 if(err) done(err);
+			 done(null, user);
+		  })
+	  }
 	});
 });
 
 router.post('/login',
-	passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }),
+	passport.authenticate('organisation_strategy', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }),
+	function (req, res) {
+		res.redirect('/');
+	});
+
+	router.post('/login_volunteer',
+	passport.authenticate('volunteer_strategy', { successRedirect: '/', failureRedirect: '/users/login_volunteer', failureFlash: true }),
 	function (req, res) {
 		res.redirect('/');
 	});
