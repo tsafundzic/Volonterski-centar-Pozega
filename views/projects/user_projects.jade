@@ -32,14 +32,17 @@ block content
                                 tr
                                     th(scope='row') Kraj
                                     td #{project.end}
+                                 tr
+                                    th(scope='row') Kraj
+                                    td #{user.id}
                                 tr
                                     th(scope='row') 
                                     td 
                                         form(action='/projects/#{project._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
                                             input(type='hidden',value='DELETE',name='_method')
-                                            button.btn.btn-default(type='submit') Obriši
+                                            button.btn.btn-secondary(type='submit') Obriši
                                             |  
-                                            a.btn.btn-default(href='/projects/#{project._id}/edit') Ažuriraj
+                                            a.btn.btn-secondary(href='/projects/#{project._id}/edit') Ažuriraj
                                 tr
                                     th(scope='row') 
                                     td 

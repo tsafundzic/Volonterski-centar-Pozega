@@ -18,6 +18,15 @@ block content
                         th(scope='col') #{project._id}
                     tbody
                         tr
+                            th(scope='row') Naziv organizacije
+                            td #{user.name}
+                        tr
+                            th(scope='row') Email organizacije
+                            td #{user.email}
+                        tr
+                            th(scope='row') Telefon organizacije
+                            td #{user.phone}
+                        tr
                             th(scope='row') Naziv posla
                             td #{project.title}
                         tr
@@ -32,6 +41,7 @@ block content
                         tr
                             th(scope='row') Kraj
                             td #{project.end}
+                         
                          tr
                             th(scope='row') 
                             td 

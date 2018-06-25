@@ -95,4 +95,9 @@ app.listen(app.get('port'), function(){
 	console.log('Server started on port '+app.get('port'));
 });
 
+app.get('/users', function(req, res) { 
+  // Get users from MongoDB and store it in usersList 
+  res.render('login', {"usersList": usersList});
+});
+
 module.exports = app;
