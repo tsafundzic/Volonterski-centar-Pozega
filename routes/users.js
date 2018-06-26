@@ -238,7 +238,7 @@ router.post('/login',
 		res.redirect('/');
 	});
 
-	router.post('/login_volunteer',
+router.post('/login_volunteer',
 	passport.authenticate('volunteer_strategy', { successRedirect: '/', failureRedirect: '/users/login_volunteer', failureFlash: true }),
 	function (req, res) {
 		res.redirect('/');
@@ -250,5 +250,30 @@ router.get('/logout', function (req, res) {
 
 	res.redirect('/users/login');
 });
+
+
+
+
+	
+router.route('/volunteers')
+    .get(function(req, res, next) {
+        mongoose.model('Volunteer').find({}, function (err, volunteers) {
+              if (err) {
+                  return console.error(err);
+              } else {
+                  res.format({
+                    html: function(){
+                        res.render('/volunteers', {
+                              "volunteers" : volunteers
+                          });
+                    },
+                    json: function(){
+                        res.json(volunteers);
+                    }
+                });
+              }     
+        });
+    })
+
 
 module.exports = router;

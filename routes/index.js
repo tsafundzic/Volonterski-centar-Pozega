@@ -8,6 +8,13 @@ router.get('/', ensureAuthenticated, function(req, res){
 	res.render('index', { title: 'Korisničke stranice' });
 });
 
+router.get('/volunteers',  function(req, res){
+	res.render('volunteers', { title: 'Burza volontera' });
+});
+
+
+
+
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

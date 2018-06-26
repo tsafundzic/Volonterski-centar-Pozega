@@ -10,12 +10,19 @@ block content
     .container
       .container
         
-        h1=user.name        
-        a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
-        p
-        a.btn.btn-secondary(href='/projects/user_projects') Pregled i uređivanje vlastitih ponuđenih poslova
-        p
-        a.btn.btn-secondary(href='/projects/new') Kreiraj novu ponudu poslova
+        h1=user.name   
+        if !user.english_level    
+          a.btn.btn-secondary(href='#') Ažuriraj korisničke informacije
+          p
+          a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
+          p
+          a.btn.btn-secondary(href='/projects/user_projects') Pregled i uređivanje vlastitih ponuđenih poslova
+          p
+          a.btn.btn-secondary(href='/projects/new') Kreiraj novu ponudu poslova
+        else
+          a.btn.btn-secondary(href='#') Ažuriraj korisničke informacije
+          p
+          a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
          
 
 
