@@ -219,16 +219,16 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-	User.getUserById(id, function(err, user){
-		if(err) done(err);
-		  if(user){
+	User.getUserById(id, function (err, user) {
+		if (err) done(err);
+		if (user) {
 			done(null, user);
-		  } else {
-			 Volunteer.getVolunteerById(id, function(err, user){
-			 if(err) done(err);
-			 done(null, user);
-		  })
-	  }
+		} else {
+			Volunteer.getVolunteerById(id, function (err, user) {
+				if (err) done(err);
+				done(null, user);
+			})
+		}
 	});
 });
 
@@ -254,7 +254,7 @@ router.get('/logout', function (req, res) {
 //
 // users list
 //	
-router.route('/organisations')
+/* router.route('/organisations')
     .get(function( res) {
         mongoose.model('User').find({}, function (err, users) {
               if (err) {
@@ -274,7 +274,7 @@ router.route('/volunteers')
             	  res.json(users);
               }     
         });
-    })
+    }) */
 
 
 module.exports = router;
