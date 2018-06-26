@@ -1,0 +1,40 @@
+extends layout
+
+block content
+
+    .jumbotron.jumbotron-fluid
+      .container
+        h1 Pregled dostupnih poslova
+        p
+          | Trenutna potražnja za volonterima.
+    .container
+      .container
+            table.table
+                - each user, i in users
+                
+                    thead.thead-light
+                        tr
+                        th(scope='col') Naziv
+                        th(scope='col') #{user.name}
+                    tbody
+                        tr
+                            th(scope='row') OIB
+                            td #{user.oib}
+                        tr
+                            th(scope='row') Email
+                            td #{user.email}
+                        tr
+                            th(scope='row') Adresa
+                            td #{user.address}
+                        tr
+                            th(scope='row') Grad
+                            td #{user.city}
+                        tr
+                            th(scope='row') Telefon
+                            td #{user.phone}
+                         
+                         tr
+                            th(scope='row') 
+                            td 
+
+        a(href='/') Nazad

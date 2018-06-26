@@ -10,31 +10,31 @@ block content
     .container
       .container
             table.table
-                - each volunteer, i in volunteers
+                - each user, i in users
                 
                     thead.thead-light
                         tr
                         th(scope='col') ID
-                        th(scope='col') #{volunteer._id}
+                        th(scope='col') #{user._id}
                     tbody
                         tr
                             th(scope='row') Datum rođenja
-                            td #{volunteer.dateOfBirth}
+                            td #{user.dateOfBirth}
                         tr
                             th(scope='row') Grad
-                            td #{volunteer.city}
+                            td #{user.city}
                         tr
                             th(scope='row') Poznavanje engleskog
-                            td #{volunteer.english_level}
+                            td #{user.english_level}
                         tr
                             th(scope='row') Rad na računalu
-                            td #{volunteer.computer_skill}
+                            td #{user.computer_skill}
                         tr
                             th(scope='row') Vrijeme volontiranja
-                            td #{volunteer.volunteering_availability}
+                            td #{user.volunteering_availability}
                         tr
                             th(scope='row') Količina tjednog volontiranja
-                            td #{volunteer.volunteering_time}
+                            td #{user.volunteering_time}
                          
                          tr
                             th(scope='row') 

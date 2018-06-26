@@ -251,26 +251,27 @@ router.get('/logout', function (req, res) {
 	res.redirect('/users/login');
 });
 
-
-
-
-	
-router.route('/volunteers')
-    .get(function(req, res, next) {
-        mongoose.model('Volunteer').find({}, function (err, volunteers) {
+//
+// users list
+//	
+router.route('/organisations')
+    .get(function( res) {
+        mongoose.model('User').find({}, function (err, users) {
               if (err) {
                   return console.error(err);
               } else {
-                  res.format({
-                    html: function(){
-                        res.render('/volunteers', {
-                              "volunteers" : volunteers
-                          });
-                    },
-                    json: function(){
-                        res.json(volunteers);
-                    }
-                });
+            	  res.json(users);
+              }     
+        });
+	})
+	
+router.route('/volunteers')
+    .get(function( res) {
+        mongoose.model('Volunteer').find({}, function (err, users) {
+              if (err) {
+                  return console.error(err);
+              } else {
+            	  res.json(users);
               }     
         });
     })

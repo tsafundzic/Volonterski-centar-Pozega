@@ -9,11 +9,12 @@ router.get('/', ensureAuthenticated, function(req, res){
 });
 
 router.get('/volunteers',  function(req, res){
-	res.render('volunteers', { title: 'Burza volontera' });
+	res.render('volunteers', { title: 'Baza volontera' });
 });
 
-
-
+router.get('/organisations',  function(req, res){
+	res.render('organisations', { title: 'Baza organizatora' });
+});
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
