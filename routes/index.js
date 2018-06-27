@@ -89,7 +89,7 @@ router.route('/:id/edit')
 	        }
 	    });
 	})
-	.put(function(req, res) {
+	.post(function(req, res) {
 		var name = req.body.name;
 		var email = req.body.email;
 		var oib = req.body.oib;
@@ -109,7 +109,15 @@ router.route('/:id/edit')
 	          if (err) {
 				  res.send("There was a problem updating the information to the database: " + err);
               } else {
-				  res.json(user);      
+				res.format({
+					html: function () {
+						res.redirect("/");
+					},
+					//JSON responds showing the updated values
+					json: function () {
+						res.json(user);
+					}
+				});          
 	           }
             })
 	    });
@@ -166,12 +174,11 @@ router.route('/:id/edit_volunteer')
 	        }
 	    });
 	})
-	.put(function(req, res) {
+	.post(function(req, res) {
 		var name = req.body.name;
 		var email = req.body.email;
 		var address = req.body.address;
 		var city = req.body.city;
-		var dateOfBirth = req.body.datumrodenja;
 		var phone = req.body.phone;
 		var sex = req.body.spol;
 		var english_level = req.body.poznavanjeengleskog;
@@ -190,13 +197,20 @@ router.route('/:id/edit_volunteer')
 				english_level: english_level,
 				computer_skill: computer_skill,
 				volunteering_availability: volunteering_availability,
-				volunteering_time: volunteering_time,
-				dateOfBirth: dateOfBirth
+				volunteering_time: volunteering_time
 	        }, function (err) {
 	          if (err) {
 				  res.send("There was a problem updating the information to the database: " + err);
               } else {
-				  res.json(user);      
+				   res.format({
+                        html: function () {
+                            res.redirect("/");
+                        },
+                        //JSON responds showing the updated values
+                        json: function () {
+                            res.json(user);
+                        }
+                    });     
 	           }
             })
 	    });
