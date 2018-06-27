@@ -291,8 +291,7 @@ router.route('/:id/edit')
 	        }, function (err, blobID) {
 	          if (err) {
 	              res.send("There was a problem updating the information to the database: " + err);
-	          } 
-	          else {
+              } else {
 	                  //HTML responds by going back to the page or you can be fancy and create a new view that shows a success page.
 	                  res.format({
 	                      html: function(){
