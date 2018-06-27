@@ -15,6 +15,9 @@ var VolunteerSchema = mongoose.Schema({
     dateOfBirth:{
         type: Date,
     },
+    sex:{
+        type: String,
+    },
     address: {
         type: String
     },

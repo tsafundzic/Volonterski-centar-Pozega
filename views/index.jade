@@ -12,7 +12,7 @@ block content
         
         h1=user.name   
         if !user.english_level    
-          a.btn.btn-secondary(href='#') Ažuriraj korisničke informacije
+          a.btn.btn-secondary(href='/#{user._id}/edit') Ažuriraj korisničke informacije
           p
           a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
           p
@@ -20,7 +20,7 @@ block content
           p
           a.btn.btn-secondary(href='/projects/new') Kreiraj novu ponudu poslova
         else
-          a.btn.btn-secondary(href='#') Ažuriraj korisničke informacije
+          a.btn.btn-secondary(href='/#{user._id}/edit_volunteer') Ažuriraj korisničke informacije
           p
           a.btn.btn-secondary(href='/projects') Pregled svih ponuđenih poslova
          

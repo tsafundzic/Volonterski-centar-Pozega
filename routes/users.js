@@ -112,6 +112,7 @@ router.post('/register_volunteer', function (req, res) {
 	var password = req.body.password;
 	var password2 = req.body.password2;
 	var english_level = req.body.poznavanjeengleskog;
+	var sex = req.body.spol;
 	var computer_skill = req.body.poznavanjeradanaracunalu;
 	var volunteering_availability = req.body.vrijemezavolontiranje;
 	var volunteering_time = req.body.satitjedno;
@@ -152,6 +153,7 @@ router.post('/register_volunteer', function (req, res) {
 			address: address,
 			city: city,
 			phone: phone,
+			sex: sex,
 			english_level: english_level,
 			computer_skill: computer_skill,
 			volunteering_availability: volunteering_availability,
