@@ -33,6 +33,11 @@ block content
                                     th(scope='row') Kraj
                                     td #{project.end}
                                 tr
+                                    th(scope='row') Prijavljeni
+                                    td 
+                                        each email in project.workers
+                                           | #{email} <br/>
+                                tr
                                     th(scope='row') 
                                     td 
                                         form(action='/projects/#{project._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
