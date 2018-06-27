@@ -14,7 +14,7 @@ router.get('/volunteers', function (req, res) {
 		if (err) {
 			return console.error(err);
 		} else {
-			res.render('volunteers', { users: users });
+			res.render('volunteers', { users: users , title: 'Baza volontera' });
 		}
 	});
 });
@@ -24,7 +24,7 @@ router.get('/organisations', function (req, res) {
 		if (err) {
 			return console.error(err);
 		} else {
-			res.render('organisations', { users: users });
+			res.render('organisations', { users: users , title: 'Baza organizatora'});
 		}
 	});
 });

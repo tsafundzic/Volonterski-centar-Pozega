@@ -251,30 +251,4 @@ router.get('/logout', function (req, res) {
 	res.redirect('/users/login');
 });
 
-//
-// users list
-//	
-/* router.route('/organisations')
-    .get(function( res) {
-        mongoose.model('User').find({}, function (err, users) {
-              if (err) {
-                  return console.error(err);
-              } else {
-            	  res.json(users);
-              }     
-        });
-	})
-	
-router.route('/volunteers')
-    .get(function( res) {
-        mongoose.model('Volunteer').find({}, function (err, users) {
-              if (err) {
-                  return console.error(err);
-              } else {
-            	  res.json(users);
-              }     
-        });
-    }) */
-
-
 module.exports = router;

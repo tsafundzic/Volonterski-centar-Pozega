@@ -12,21 +12,14 @@ block content
         if !user || !user.english_level
             table.table
                 - each project, i in projects
+                 - each user, j in users
+                   if (project.creator_id==user._id)
                 
                     thead.thead-light
                         tr
                         th(scope='col') Posao ID
                         th(scope='col') #{project._id}
                     tbody
-                        tr
-                            th(scope='row') Naziv organizacije
-                            td #{project.creator_id.email}
-                        tr
-                            th(scope='row') Email organizacije
-                            td #{project.creator_id.email}
-                        tr
-                            th(scope='row') Telefon organizacije
-                            td #{project.creator_id}
                         tr
                             th(scope='row') Naziv posla
                             td #{project.title}
@@ -42,6 +35,19 @@ block content
                         tr
                             th(scope='row') Kraj
                             td #{project.end}
+                        tr
+                            th(scope='row') Naziv organizacije
+                            td #{user.name}
+                        tr
+                            th(scope='row') Email organizacije
+                            td #{user.email}
+                        tr
+                            th(scope='row') Telefon organizacije
+                            td #{user.phone}
+                        tr
+                             th(scope='row') 
+                             td  
+                               a.btn.btn-secondary(href='mailto:#{user.email}') Kontakt
                          
                          tr
                             th(scope='row') 
@@ -80,11 +86,17 @@ block content
                         tr
                             th(scope='row') Kraj
                             td #{project.end}
+                         tr
+                            th(scope='row') Radnici
+                            td #{project.workers}
                         
                         tr
                             th(scope='row') 
                             td 
-                               a.btn.btn-secondary(href='#') Prijavi se
+                               
+                                form.form-horizontal(action='/projects/#{project._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+                    
+                                    button.btn.btn-secondary(type="submit") Prijavi se
                          tr
                             th(scope='row') 
                             td 

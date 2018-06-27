@@ -51,6 +51,7 @@ router.route('/')
     .get(function(req, res, next) {
         //retrieve all projects from Monogo
         mongoose.model('Project').find({}, function (err, projects) {
+            mongoose.model('User').find({}, function (err, users) {
               if (err) {
                   return console.error(err);
               } else {
@@ -60,17 +61,18 @@ router.route('/')
                     html: function(){
                         res.render('projects/index', {
                               title: 'Svi poslovi',
-                              "projects" : projects
+                              "projects" : projects,
+                              "users" : users
                           });
                     },
                     //JSON response will show all projects in JSON format
                     json: function(){
-                        res.json(projects);
+                        res.json(projects, users);
                     }
                 });
               }     
-        });
-    })
+            });});
+    })   
     //POST a new project
     .post(function(req, res) {
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "title" attributes for forms
@@ -110,7 +112,7 @@ router.route('/')
               }
         })
     });
-
+    
 /* GET New Project page. */
 router.get('/new', function(req, res) {
     res.render('projects/new', { title: 'Dodaj novi posao' });
