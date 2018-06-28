@@ -344,13 +344,14 @@ router.route('/:id/edit')
             if (err) {
                 return console.error(err);
             } else {
-                //console.log(req.user);
-                project.workers.push(req.user.email);
-                project.save(function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
+                if (project.workers.indexOf(req.user.email) == -1) {
+                    project.workers.push(req.user.email);
+                    project.save(function (err) {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
                 res.redirect('/');
             }
         })
